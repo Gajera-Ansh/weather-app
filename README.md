@@ -7,7 +7,7 @@ Users can input a city to view **real-time weather conditions**, **temperature**
 
 ## 📸 Demo
 
-![Weather App Screenshot](In Screen shot folder)  
+![Weather App Screenshot](In ScreenShot folder)  
 
 ---
 
