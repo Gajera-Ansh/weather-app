@@ -1,0 +1,343 @@
+* {
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+#weather-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 0;
+    pointer-events: none;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.weather-container {
+    position: relative;
+    z-index: 1;
+    background-color: #ffffffcc;
+    border-radius: 20px;
+    padding: 30px;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+input[type="text"] {
+    width: 80%;
+    padding: 10px;
+    border: 2px solid #9face6;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #6c63ff;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
+}
+
+button:hover {
+    background-color: #5548c8;
+    box-shadow: 0 4px 12px rgba(108, 99, 255, 0.2);
+    transform: translateY(-2px) scale(1.03);
+}
+
+button:active {
+    background-color: #3d36a7;
+    transform: scale(0.97);
+    box-shadow: 0 2px 6px rgba(108, 99, 255, 0.15);
+}
+
+.result {
+    margin-top: 20px;
+}
+
+.temp {
+    font-size: 2em;
+    font-weight: bold;
+}
+
+.emoji {
+    font-size: 3em;
+}
+
+.condition {
+    font-size: 1.2em;
+    margin-top: 5px;
+}
+
+/* Sunny */
+.sunny-bg {
+    background: linear-gradient(to top right, #ffe259, #ffa751);
+    transition: background 1s;
+}
+
+.sun {
+    position: absolute;
+    top: 10%;
+    left: 70%;
+    width: 120px;
+    height: 120px;
+    background: radial-gradient(circle, #fffde4 40%, #ffd700 100%);
+    border-radius: 50%;
+    box-shadow: 0 0 60px 30px #ffd70088;
+    animation: sun-move 6s linear infinite alternate;
+}
+
+@keyframes sun-move {
+    0% {
+        top: 10%;
+        left: 70%;
+    }
+
+    100% {
+        top: 15%;
+        left: 60%;
+    }
+}
+
+/* Rainy */
+.rainy-bg {
+    background: linear-gradient(to top, #232526, #414345);
+    transition: background 1s;
+}
+
+.cloud,
+.cloudy-bg .cloud,
+.rainy-bg .cloud,
+.snowy-bg .cloud,
+.stormy-bg .cloud {
+    position: absolute;
+    top: 15%;
+    left: 60%;
+    width: 140px;
+    height: 60px;
+    background: #fff;
+    border-radius: 60px;
+    box-shadow: 60px 0 0 0 #fff, 30px 0 0 0 #eee;
+    opacity: 0.85;
+    animation: cloud-move 8s linear infinite alternate;
+}
+
+@keyframes cloud-move {
+    0% {
+        left: 60%;
+    }
+
+    100% {
+        left: 50%;
+    }
+}
+
+.rain {
+    position: absolute;
+    top: 30%;
+    left: 70%;
+    width: 4px;
+    height: 60px;
+    background: repeating-linear-gradient(to bottom,
+            #00c6fb 0 8px,
+            transparent 8px 16px);
+    border-radius: 2px;
+    animation: rain-fall 0.7s linear infinite;
+}
+
+@keyframes rain-fall {
+    0% {
+        top: 30%;
+        opacity: 1;
+    }
+
+    100% {
+        top: 60%;
+        opacity: 0.2;
+    }
+}
+
+/* Cloudy */
+.cloudy-bg {
+    background: linear-gradient(to top, #d7d2cc, #304352);
+    transition: background 1s;
+}
+
+/* Snowy */
+.snowy-bg {
+    background: linear-gradient(to top, #e0eafc, #cfdef3);
+    transition: background 1s;
+}
+
+.snow {
+    position: absolute;
+    top: 35%;
+    left: 75%;
+    width: 6px;
+    height: 60px;
+    background: repeating-linear-gradient(to bottom,
+            #fff 0 8px,
+            transparent 8px 16px);
+    border-radius: 3px;
+    opacity: 0.8;
+    animation: snow-fall 1.2s linear infinite;
+}
+
+@keyframes snow-fall {
+    0% {
+        top: 35%;
+        opacity: 1;
+    }
+
+    100% {
+        top: 65%;
+        opacity: 0.2;
+    }
+}
+
+/* Foggy */
+.foggy-bg {
+    background: linear-gradient(to top, #757f9a, #d7dde8);
+    transition: background 1s;
+}
+
+.fog {
+    position: absolute;
+    top: 40%;
+    left: 60%;
+    width: 180px;
+    height: 30px;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 20px;
+    filter: blur(6px);
+    animation: fog-move 6s linear infinite alternate;
+}
+
+@keyframes fog-move {
+    0% {
+        left: 60%;
+    }
+
+    100% {
+        left: 50%;
+    }
+}
+
+/* Stormy */
+.stormy-bg {
+    background: linear-gradient(to top, #232526, #414345 80%, #fff 100%);
+    transition: background 1s;
+}
+
+.lightning {
+    position: absolute;
+    top: 35%;
+    left: 80%;
+    width: 8px;
+    height: 40px;
+    background: linear-gradient(to bottom, #fff 60%, #ffd700 100%);
+    clip-path: polygon(50% 0%, 60% 40%, 40% 40%, 60% 100%, 50% 60%, 70% 60%);
+    opacity: 0.8;
+    animation: lightning-flash 2s infinite;
+}
+
+@keyframes lightning-flash {
+    0%,
+    97%,
+    100% {
+        opacity: 0;
+    }
+
+    98% {
+        opacity: 1;
+    }
+}
+
+/* Default */
+.default-bg {
+    background: linear-gradient(to top right, #74ebd5, #9face6);
+    transition: background 1s;
+}
+
+.real-cloud {
+    position: absolute;
+    top: 15%;
+    left: 60%;
+    width: 120px;
+    height: 60px;
+    background: transparent;
+    z-index: 1;
+    animation: cloud-move 8s linear infinite alternate;
+}
+
+.real-cloud::before,
+.real-cloud::after {
+    content: '';
+    position: absolute;
+    background: #fff;
+    opacity: 0.85;
+    border-radius: 50%;
+    filter: blur(1px);
+}
+
+.real-cloud::before {
+    width: 70px;
+    height: 70px;
+    left: 10px;
+    top: -20px;
+}
+
+.real-cloud::after {
+    width: 90px;
+    height: 90px;
+    left: 40px;
+    top: -30px;
+}
+
+.real-cloud .cloud-part1,
+.real-cloud .cloud-part2,
+.real-cloud .cloud-part3 {
+    position: absolute;
+    background: #fff;
+    opacity: 0.85;
+    border-radius: 50%;
+    filter: blur(1px);
+}
+
+.real-cloud .cloud-part1 {
+    width: 60px;
+    height: 60px;
+    left: 0;
+    top: 10px;
+}
+
+.real-cloud .cloud-part2 {
+    width: 80px;
+    height: 80px;
+    left: 40px;
+    top: 0;
+}
+
+.real-cloud .cloud-part3 {
+    width: 50px;
+    height: 50px;
+    left: 90px;
+    top: 20px;
+}
